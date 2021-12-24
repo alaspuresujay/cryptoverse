@@ -8,14 +8,15 @@ const { Text, Title } = Typography;
 const { Option } = Select;
 const News = ({ simplified }) => {
   const [newsCategory, setNewsCategory] = useState("CryptoCurrency");
-  const { data: cryptoNews } = useGetCryptoNewsQuery({
+  const { data: cryptoNews, isFetching } = useGetCryptoNewsQuery({
     newsCategory,
     count: simplified ? 6 : 12,
   });
   const { data } = useGetCryptosQuery(100);
   console.log("LOG> [components/News.jsx:13] cryptoNews --->", cryptoNews);
+  const temp = [1, 2, 3, 4];
 
-  if (!cryptoNews?.value) return "Loading...";
+  if (!cryptoNews?.value) return <Loading loading={isFetching} />;
   return (
     <>
       <Row gutter={[24, 24]}>
@@ -43,7 +44,7 @@ const News = ({ simplified }) => {
 
         {cryptoNews.value.map((news, index) => (
           <Col key={index} xs={24} sm={24} lg={8}>
-            <Card hoverable className="news-card">
+            <Card hoverable className="news-card" loading={isFetching}>
               <a href={news.url} target="_blank" rel="noreferrer">
                 <div className="news-image-container">
                   <Title className="news-title" level={4}>
@@ -89,3 +90,14 @@ const News = ({ simplified }) => {
 };
 
 export default News;
+
+const Loading = (loading) => {
+  const temp = [1, 2, 3, 4];
+  return (
+    <Row gutter={[24, 24]}>
+      {temp.map((item) => (
+        <Card style={{ width: 300, marginTop: 16 }} loading={loading}></Card>
+      ))}
+    </Row>
+  );
+};
