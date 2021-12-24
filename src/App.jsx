@@ -20,7 +20,7 @@ function App() {
         <Layout>
           <div className="routes">
             <Routes>
-              <Route exact path="/" element={<HomePage />} />
+              <Route exact path="/cryptoverse" element={<HomePage />} />
               <Route
                 exact
                 path="/cryptocurrencies"
@@ -40,7 +40,7 @@ function App() {
             Cryptoverse
           </Typography.Title>
           <Space>
-            <Link to="/">Home</Link>
+            <Link to="/cryptoverse">Home</Link>
             {/* <Link to="/cryptocurrencies">Cryptocurrencies</Link> */}
             <Link to="/exchanges">Exchanges</Link>
             <Link to="/news">News</Link>
