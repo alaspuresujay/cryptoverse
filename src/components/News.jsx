@@ -13,8 +13,6 @@ const News = ({ simplified }) => {
     count: simplified ? 6 : 12,
   });
   const { data } = useGetCryptosQuery(100);
-  console.log("LOG> [components/News.jsx:13] cryptoNews --->", cryptoNews);
-  const temp = [1, 2, 3, 4];
 
   if (!cryptoNews?.value) return <Loading loading={isFetching} />;
   return (
@@ -35,8 +33,10 @@ const News = ({ simplified }) => {
               }
             >
               <Option value="CryptoCurrency">CryptoCurrency</Option>
-              {data?.data?.coins.map((coin) => (
-                <Option value={coin.name}>{coin.name}</Option>
+              {data?.data?.coins.map((coin, idx) => (
+                <Option key={idx} value={coin.name}>
+                  {coin.name}
+                </Option>
               ))}
             </Select>
           </Col>
@@ -96,7 +96,11 @@ const Loading = (loading) => {
   return (
     <Row gutter={[24, 24]}>
       {temp.map((item) => (
-        <Card style={{ width: 300, marginTop: 16 }} loading={loading}></Card>
+        <Card
+          key={item}
+          style={{ width: 300, marginTop: 16 }}
+          loading={loading}
+        ></Card>
       ))}
     </Row>
   );
